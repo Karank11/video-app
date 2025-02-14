@@ -3,6 +3,7 @@ package com.example.videoapp.viewmodels
 import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -22,8 +23,7 @@ class VideoFeedViewModel(application: Application): AndroidViewModel(application
 
     init {
         val cm = application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val activeNetwork = cm.activeNetworkInfo
-        val isConnected = activeNetwork?.isConnectedOrConnecting == true
+        val isConnected = cm.getNetworkCapabilities(cm.activeNetwork)?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) == true
         if (isConnected) {
             viewModelScope.launch {
                 videosRepository.refreshVideos()
