@@ -1,6 +1,8 @@
 package com.example.videoapp.viewmodels
 
 import android.app.Application
+import android.content.Context
+import android.net.ConnectivityManager
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -19,12 +21,17 @@ class VideoFeedViewModel(application: Application): AndroidViewModel(application
     private val videosRepository = VideosRepository(database)
 
     init {
-        viewModelScope.launch {
-            videosRepository.refreshVideos()
+        val cm = application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork = cm.activeNetworkInfo
+        val isConnected = activeNetwork?.isConnectedOrConnecting == true
+        if (isConnected) {
+            viewModelScope.launch {
+                videosRepository.refreshVideos()
+            }
         }
     }
 
-    private val playlist = videosRepository.videos
+    val playlist = videosRepository.videos
 
     override fun onCleared() {
         super.onCleared()

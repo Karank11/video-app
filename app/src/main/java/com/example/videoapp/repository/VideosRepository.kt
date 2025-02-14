@@ -1,5 +1,6 @@
 package com.example.videoapp.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import com.example.videoapp.database.VideosDatabase
@@ -22,8 +23,12 @@ class VideosRepository(private val database: VideosDatabase) {
 
     suspend fun refreshVideos() {
         withContext(Dispatchers.IO) {
-            val playlist = Network.videosApiService.getPlaylist().await()
-            database.videoDao.insertAll(*playlist.asDatabaseModel())
+            try {
+                val playlist = Network.videosApiService.getPlaylist().await()
+                database.videoDao.insertAll(*playlist.asDatabaseModel())
+            } catch (e: Exception) {
+                Log.e("VideoRepository", "refreshVideos: ", e)
+            }
         }
     }
 }
