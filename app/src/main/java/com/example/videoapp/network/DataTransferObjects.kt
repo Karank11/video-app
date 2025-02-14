@@ -1,5 +1,6 @@
 package com.example.videoapp.network
 
+import com.example.videoapp.database.DatabaseVideo
 import com.example.videoapp.domain.Video
 import com.squareup.moshi.JsonClass
 
@@ -47,4 +48,15 @@ fun NetworkVideoContainer.asDomainModel(): List<Video> {
             updated = it.updated,
             thumbnail = it.thumbnail)
     }
+}
+
+fun NetworkVideoContainer.asDatabaseModel(): Array<DatabaseVideo> {
+    return videos.map {
+        DatabaseVideo(
+            title = it.title,
+            description = it.description,
+            url = it.url,
+            updated = it.updated,
+            thumbnail = it.thumbnail)
+    }.toTypedArray()
 }
