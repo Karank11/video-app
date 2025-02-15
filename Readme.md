@@ -16,7 +16,8 @@ The **Video Feed App** is an Android application designed to fetch and display a
     - The user can click a video, triggering an **Intent** to open the video in the YouTube app.
 
 State diagram covering the major component and interactions of Video Feed App:
-[state_diagram.png](assets/state_diagram.png)
+
+![state_diagram.png](assets/state_diagram.png)
 
 ## Key Components
 - **VideoFeedApplication**: Initializes background tasks using WorkManager.
