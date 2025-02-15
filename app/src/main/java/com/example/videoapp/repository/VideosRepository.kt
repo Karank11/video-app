@@ -19,7 +19,9 @@ import kotlinx.coroutines.withContext
 
 class VideosRepository(private val database: VideosDatabase) {
 
-    val videos: LiveData<List<Video>> = database.videoDao.getVideos().map { it.asDomainModel() }
+    val videos: LiveData<List<Video>> = database.videoDao.getVideos().map {
+        it.asDomainModel()
+    }
 
     suspend fun refreshVideos() {
         withContext(Dispatchers.IO) {
