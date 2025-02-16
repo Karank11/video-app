@@ -46,7 +46,5 @@ State diagram covering the major component and interactions of Video Feed App:
 6. Clicking a video launches YouTube via an intent.
 
 ## Future Enhancements
-- Implement pagination for large video lists.
-- Add caching mechanisms to reduce API calls.
 - Improve UI with animations and transitions.
 - Enable offline playback of downloaded videos.
