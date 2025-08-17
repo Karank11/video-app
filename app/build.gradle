@@ -67,13 +67,14 @@ dependencies {
     // Moshi for parsing the JSON format
     implementation libs.moshi
     implementation libs.moshi.kotlin
+    kapt libs.moshi.kotlin.codegen
 
     // Glide for images
     implementation libs.glide
 
     // Room database
     implementation libs.androidx.room.runtime
-    kapt "androidx.room:room-compiler:$version_room"
+    kapt libs.androidx.room.compiler
 
     // Kotlin Extensions and Coroutines support for Room
     implementation libs.androidx.room.ktx
